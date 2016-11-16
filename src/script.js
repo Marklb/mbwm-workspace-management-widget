@@ -1,6 +1,9 @@
 const fs = require('fs');
 
+const $ = require('jquery');
+
 const css = `<style>\n${fs.readFileSync('./src/styles.css')}</style>`;
+
 
 let initWidget = () => {
   document.head.innerHTML+=css;
@@ -19,18 +22,25 @@ let initWidget = () => {
   widget.appendChild(procsSideDrawer);
 
   //---------------------------------------------------------------------------
+  // Container
+  //---------------------------------------------------------------------------
+  let container = document.createElement('div');
+  container.classList.add('container');
+  widget.appendChild(container);
+
+  //---------------------------------------------------------------------------
   // Vertical Menu
   //---------------------------------------------------------------------------
   let verticalMenu = document.createElement('div');
   verticalMenu.classList.add('vertical-menu');
-  widget.appendChild(verticalMenu);
+  container.appendChild(verticalMenu);
 
   //---------------------------------------------------------------------------
   // Toggle Side Drawer Button
   //---------------------------------------------------------------------------
   let toggleSideDrawerBtn = document.createElement('div');
   toggleSideDrawerBtn.classList.add('toggle-side-drawer-btn');
-  widget.appendChild(toggleSideDrawerBtn);
+  verticalMenu.appendChild(toggleSideDrawerBtn);
 
   toggleSideDrawerBtn.addEventListener('mousedown', (e) => {
     if(e.button === 0){
@@ -65,6 +75,7 @@ let initWidget = () => {
       proc.innerHTML = procData.text;
       proc._procData = procData;
       procsSideDrawer.appendChild(proc);
+      makeElementDraggable(proc);
     }
   };
 
@@ -76,6 +87,45 @@ let initWidget = () => {
 };
 
 
+global._elementBeingDragged;
+let makeElementDraggable = (element) => {
+  // console.log('makeElementDraggable');
+  // console.log(element);
+
+
+  let offsetX;
+  let offsetY;
+
+  let elemRef = $(element);
+
+  element.addEventListener('mousedown', (e) => {
+    console.log('drag');
+    console.log(element);
+    // off
+    console.log(e);
+    // console.log(`offsetX: ${offsetX}, offsetY: ${offsetY}`);
+    console.log(`page (${e.pageX}, ${e.pageY})`);
+    console.dir(element);
+
+    // var x = e.pageX - elemRef.offset().left;
+    // var y = e.pageY - elemRef.offset().top;
+    // console.log(`pos (${x}, ${y})`);
+    offsetX = e.pageX - elemRef.offset().left;
+    offsetY = e.pageY - elemRef.offset().top;
+    console.log(`pos (${offsetX}, ${offsetY})`);
+
+    // document.body.appendChild(element);
+    let bounds = element.getBoundingClientRect();
+    element.style.position = 'absolute';
+    // element.style.left = `${e.pageX+x}px`;
+    // element.style.top = `${e.pageY+y}px`;
+    element.style.left = `${e.pageX-offsetX}px`;
+    element.style.top = `${e.pageY-offsetY}px`;
+    element.style.width = `${bounds.width}px`;
+    element.style.height = `${bounds.height}px`;
+    document.body.appendChild(element);
+  });
+};
 
 
 let t = initWidget();
