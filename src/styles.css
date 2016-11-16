@@ -1,0 +1,77 @@
+
+.mbwm-workspace-management-widget {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  left: 5px;
+  background-color: rgba(40,40,40,1);
+}
+
+.mbwm-workspace-management-widget ::-webkit-scrollbar {
+    /*width: 8px;*/
+    background-color: rgba(50, 50, 50, 1);
+}
+
+.mbwm-workspace-management-widget ::-webkit-scrollbar:horizontal {
+    height: 8px;
+    background-color: rgba(50, 50, 50, 1);
+}
+
+.mbwm-workspace-management-widget ::-webkit-scrollbar:vertical {
+    width: 8px;
+    background-color: rgba(50, 50, 50, 1);
+}
+
+.mbwm-workspace-management-widget ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.mbwm-workspace-management-widget ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    background-color: rgba(30, 0, 100, 1);
+}
+
+.mbwm-workspace-management-widget .processes-side-drawer {
+  width: 200px;
+  height: 100%;
+  background-color: rgba(40,40,80,1);
+  float: left;
+  overflow-y: scroll;
+}
+
+.mbwm-workspace-management-widget .processes-side-drawer.hidden {
+  width: 0;
+  padding: 0;
+}
+
+.mbwm-workspace-management-widget .processes-side-drawer .process-btn {
+  width: 100%;
+  background-color: rgba(40,60,120,1);
+  display: block;
+  padding: 2px 0 2px 4px;
+  margin-bottom: 2px;
+  color: rgba(230,230,230,1);
+  box-sizing: border-box;
+}
+
+.mbwm-workspace-management-widget .processes-side-drawer .process-btn:last-child {
+  margin-bottom: 0;
+}
+
+.mbwm-workspace-management-widget .vertical-menu {
+   height: 40px;
+   /*width: 100%;*/
+   background-color: rgba(20,80,130,1);
+   box-sizing: border-box;
+   border: 2px solid green;
+}
+
+.mbwm-workspace-management-widget .toggle-side-drawer-btn {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(40,40,80,1);
+  float: left;
+}
